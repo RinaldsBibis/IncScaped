@@ -1,7 +1,6 @@
 import React from 'react'
 import StorieComponent from '../storie/storie.component'
 import { useContext } from 'react'
-import { UserContext } from "../../context/user.context";
 import { StorieContext } from '../../context/storie.context'
 import './stories-list.styles.scss'
 import { useEffect } from 'react'
@@ -11,16 +10,17 @@ import axiosClient from '../../axios'
 export default function StoriesListComponent() {  
   
   const {stories, setStorie} = useContext(StorieContext);
+  const fetchData = async () => {
+    axiosClient.get('/storyAll')
+    .then(({data})=>{
+      setStorie(data.data)
+    })
+    .catch((error)=>{
+        console.log(error);
+    }); 
+};
   useEffect(() => {
-    const fetchData = async () => {
-        axiosClient.get('/storyAll')
-        .then(({data})=>{
-          setStorie(data.data)
-        })
-        .catch((error)=>{
-            console.log(error);
-        }); 
-    };
+    
     fetchData();
   }, []);
   
@@ -33,6 +33,14 @@ export default function StoriesListComponent() {
   };
   
   const handleDeleteStory = (storie) => {
+    axiosClient.delete(`/story/${storie.id}`)
+    .then(({data})=>{
+      console.log(data);
+      fetchData();
+    })
+    .catch((error)=>{
+        console.log(error);
+    }); 
   }; 
 
   return (
@@ -40,7 +48,7 @@ export default function StoriesListComponent() {
      
         {stories.map((storie, index) => (
  
-          <StorieComponent key={index} buttons={<button type="submit" onClick={(event) => handleCombinedClick(event, storie)}  >Delete</button>} storie={storie}/> 
+          <StorieComponent key={index} buttons={<button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</button>} storie={storie}/> 
 
         ))}
        

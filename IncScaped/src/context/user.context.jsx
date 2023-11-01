@@ -12,7 +12,7 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({children}) =>{
-    const [currentUser,setCurrentUser] = useState({});
+    const [currentUser,_setCurrentUser] = useState({});
     const [allUsers,setAllUsers] = useState([]);
     const [userToken,_setUserToken] = useState(localStorage.getItem('TOKEN') || '');
     

@@ -1,25 +1,28 @@
 .storie-body-container {
-    width: 50%; /* Make the stories wide */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 16px;
-    margin: 8px 0; /* Add vertical margin to separate stories */
-    background-color: rgb(206, 252, 238);
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Optional box shadow */
+  width: 50%; /* Make the stories wide */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 8px 0; /* Add vertical margin to separate stories */
+  background-color: rgb(206, 252, 238);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Optional box shadow */
 
-   
-    h2 {
-      font-weight: bold;
-      margin: 0 6px 0;
-      font-size: 22px;
-      color: #4a4a4a;
-    }
-
-    p {
-      font-weight: lighter;
-      font-size: 16px;
-    }
-    &:hover {
-      border-color: #202122; 
-    }
+  /* Allow text to wrap to a new line when it goes out of bounds */
+  white-space: normal;
+  word-wrap: break-word;
+  h2 {
+    font-weight: bold;
+    margin: 0 6px 0;
+    font-size: 22px;
+    color: #4a4a4a;
   }
+
+  p {
+    font-weight: lighter;
+    font-size: 16px;
+  }
+
+  &:hover {
+    border-color: #202122;
+  }
+}
