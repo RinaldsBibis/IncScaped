@@ -16,12 +16,15 @@ export default function SignInForm() {
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {email,password} = formFields;
     
+
+    
     const handleSubmit = async (event) =>{
         event.preventDefault(); 
         axiosClient.post('/login', formFields)
         .then(({data})=>{
-            setCurrentUser(data.user);
             setUserToken(data.token);
+            setCurrentUser(data.user);
+           
         })
         .catch((error)=>{
             console.log(error);

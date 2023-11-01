@@ -5,6 +5,7 @@ import CrwnLogo from '../../assets/crown.svg'
 import axiosClient from '../../axios'
 import { UserContext } from '../../context/user.context'
 import './navigation.styles.scss'
+
 export default function Navigation() {  
     const {userToken,setCurrentUser,setUserToken} = useContext(UserContext);
     const signOut = (event)=>{
@@ -16,6 +17,8 @@ export default function Navigation() {
       }).catch((error)=>{
         console.log(error);
     });
+
+    
     }
 
     return(
@@ -28,6 +31,7 @@ export default function Navigation() {
                 {userToken?(
                   <>
                     <Link className='nav-link' to="/write">RAKSTĪT</Link>
+                    <Link className='nav-link' to="/admin">admin</Link>
                     <span className='nav-link' onClick={signOut}>SIGN OUT</span>
                   </>
                 ):(
