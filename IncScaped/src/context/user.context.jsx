@@ -84,7 +84,7 @@ export const UserContext = createContext({
 
 export const UserProvider = ({children}) =>{
     const [currentUser,_setCurrentUser] = useState(TempCurrentUser);
-    const [allUsers,setAllUsers] = useState(TempUsers);
+    const [allUsers,setAllUsers] = useState([]);
     const [userToken,_setUserToken] = useState(localStorage.getItem('TOKEN') || '');
     
     

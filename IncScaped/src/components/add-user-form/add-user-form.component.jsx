@@ -10,7 +10,7 @@ const defaultFormFields = {
     password:'',
 }
 
-export default function AddUserForm() {
+export default function AddUserForm({getAllUsers}) {
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {username,email,password} = formFields;
 
@@ -20,7 +20,9 @@ export default function AddUserForm() {
         event.preventDefault()
         axiosClient.post('/signup', userInfo)
         setFormFields(defaultFormFields);
+        getAllUsers();
     }
+
     const handleChanges = (event) =>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value})        

@@ -7,29 +7,45 @@ import { useContext } from "react";
 import { UserContext } from "../../context/user.context";
 import StoriesListComponent from '../../components/stories-list/stories-list.component'
 import AddUserForm from "../../components/add-user-form/add-user-form.component";
+import { useEffect } from "react";
 export default function AdminHomeComponent() {
-  const [prompts, setPrompts] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
+  const [prompt_text, setPrompts] = useState('');
+  const [show_date, setshow_date] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // axiosClient.post("/prompt", storyInfo)
+     axiosClient.post("/prompt", storyInfo)
       console.log(storyInfo)
       setPrompts('')
-    setSelectedDate('')
+    setshow_date('')
   };
 
   const handleDeleteUser = (user) => {
-    console.log(user.id)
-    console.log(user.username)
-    console.log(user.email)
+    axiosClient.delete(`/users/${user.id}`)
+    getAllUsers();
+  
   };
+
   const handleChange = (event) => {
     const { value } = event.target;
     setPrompts(value);
   };
+  const getAllUsers = async() => {
+    axiosClient.get(`/users_all`)
+    .then(({data})=>{
+       setAllUsers(data)
+  })
+  .catch((error)=>{
+      console.log(error);
+  });
+  }
+useEffect(()=>{
+getAllUsers();
+},[])
 
-  const { allUsers } = useContext(UserContext);
+  const { allUsers,setAllUsers } = useContext(UserContext);
+
+
   const handleButtonClick = (event) => {
     event.preventDefault(); // This prevents the default form submission behavior
     // Add your custom logic here
@@ -50,14 +66,14 @@ export default function AdminHomeComponent() {
  
 
   const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-    console.log(selectedDate)
+    setshow_date(e.target.value);
+    console.log(show_date)
     
   };
 
   const storyInfo = {
-    prompts,
-    selectedDate
+    prompt_text,
+    show_date
 }
 const handleCombinedClick = (event, user) => {
   handleButtonClick(event);
@@ -73,15 +89,15 @@ const handleCombinedClick = (event, user) => {
             onChange={handleChange}
             label="Jaunā stāsta ideja"
             type="text"
-            name="prompts"
-            value={prompts}
+            name="prompt_text"
+            value={prompt_text}
           />
           <label htmlFor="datePicker">Izvēlies datumu: </label>
       <input
         type="date"
         id="datePicker"
         name="date"
-        value={selectedDate}
+        value={show_date}
         onChange={handleDateChange}
       />
     <p></p>
@@ -134,7 +150,7 @@ const handleCombinedClick = (event, user) => {
         </div>
 
         <div className="four">
-          <AddUserForm/>
+          <AddUserForm getAllUsers={getAllUsers}/>
           </div>        
 
     </div>

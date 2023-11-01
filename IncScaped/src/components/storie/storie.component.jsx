@@ -24,7 +24,7 @@ export default function StorieComponent({ storie, buttons }) {
         
           <>
             <p>
-              {storie.story_date} Author: {user.username}
+              {/* {storie.story_date} Author: {user.username} */}
             </p>
             <p>Rating: {rait.rating}</p>
             <p>Title: {storie.title}</p>
