@@ -9,8 +9,12 @@ import StoriesListComponent from '../../components/stories-list/stories-list.com
 import AddUserForm from "../../components/add-user-form/add-user-form.component";
 import { useEffect } from "react";
 export default function AdminHomeComponent() {
+
+
+
   const [prompt_text, setPrompts] = useState('');
   const [show_date, setshow_date] = useState('');
+  const [error_message, setError_message] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,9 +25,16 @@ export default function AdminHomeComponent() {
   };
 
   const handleDeleteUser = (user) => {
+
     axiosClient.delete(`/users/${user.id}`)
-    getAllUsers();
-  
+    .then(({data})=>{
+
+ })
+ .catch(({response})=>{
+     console.log(response.data);
+     setError_message(response.data.message);
+ });
+ getAllUsers();
   };
 
   const handleChange = (event) => {
@@ -40,6 +51,7 @@ export default function AdminHomeComponent() {
   });
   }
 useEffect(()=>{
+
 getAllUsers();
 },[])
 
@@ -81,8 +93,9 @@ const handleCombinedClick = (event, user) => {
 };
 
   return (
-
+    
     <div className="wrapper"> 
+    {error_message&&<h1>{error_message}</h1>}
       <div className="one">
         <form onSubmit={handleSubmit}>
           <FormInput

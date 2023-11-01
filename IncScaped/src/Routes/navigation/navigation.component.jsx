@@ -5,15 +5,18 @@ import CrwnLogo from '../../assets/crown.svg'
 import axiosClient from '../../axios'
 import { UserContext } from '../../context/user.context'
 import './navigation.styles.scss'
+import { useNavigate } from "react-router-dom";
 
 export default function Navigation() {  
     const {userToken,setCurrentUser,setUserToken} = useContext(UserContext);
+    const navigate = useNavigate();
     const signOut = (event)=>{
       event.preventDefault();
       axiosClient.post('/logout')
       .then(response=>{
         setCurrentUser({});
         setUserToken(null);
+        navigate("/auth");
       }).catch((error)=>{
         console.log(error);
     });
