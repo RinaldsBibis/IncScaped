@@ -1,45 +1,59 @@
 import React from 'react'
 import "./write-page.styles.scss"
-import axios from 'axios';
+import { useEffect } from 'react';
+import axiosClient from '../../axios';
 import { useState } from 'react';
-
 import Button from '../../components/button/button.component';
+import { useNavigate } from "react-router-dom";
+
 export default function WritePageComponent() {
+  const navigate = useNavigate();
+  const [prompt, setPrompt] = useState({})
+  const [formData, setFormData] = useState({
+    prompt_id: '',
+    title: '',
+    content: '',
+  });
   const handleTitleChange = (e) => {
-    // setTitle(e.target.value);
+    setFormData({
+      ...formData,
+      title: e.target.value,
+    });
   };
 
-  const handleStoryTextChange = (e) => {
-    // setStoryText(e.target.value);
-    
-  };
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
-  const [formData, setFormData] = useState({
-    user_id: 1,
-    prompt_id: 1,
-    title: 'title',
-    content: 'content',
-    story_date: formattedDate
-  });
+  const handleStoryTextChange = (e) => {    
+    setFormData({
+      ...formData,
+      content: e.target.value,
+    });
+  };  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosClient.get(`/latest_prompt`);
+        setPrompt(response.data)
+        setFormData({
+          ...formData,
+          prompt_id: response.data.id,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleStorySubmit = async (e) => {
     e.preventDefault();   
-    //TODO
-    // axios.post('http://localhost/InkScaped/IncScaped/BackEnd/stories', formData, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then((response) => {
-    //     console.log('Story created successfully:', response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error creating story:', error);
-    //   });
+    axiosClient.post('/story', formData)
+        .then(({data})=>{
+          console.log(data)     
+          navigate("/");     
+        })
+        .catch((error)=>{
+            console.log(error);
+        });  
+        
   };
 
   //tab
@@ -61,21 +75,21 @@ export default function WritePageComponent() {
 
   return (
     <div className="write-page-container">
-      <h1>Write Your Story</h1>
+      <h1>Write Your Story about {prompt.prompt_text}</h1>
       <div className="form-container">      
         <form onSubmit={handleStorySubmit}>
           <input
             className='write-title'
             type="text"
             id="title"
-            // value={""}
+            value={formData.title}
             onChange={handleTitleChange}
             required
           />
           <textarea
             className='storyText'
             id="storyText"
-            // value={""}
+            value={formData.content}
             onChange={handleStoryTextChange}
             onKeyDown={handleKeyDown}
             required

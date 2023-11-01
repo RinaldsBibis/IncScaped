@@ -37,6 +37,20 @@ class StoriesController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $story = stories::with('user')->find($id);
+
+        if (!$story) {
+            return response()->json(['error' => 'Story not found'], 404);
+        }
+
+        // Transform the story using the StorieResource
+        $storyResource = new StorieResource($story);
+
+        return $storyResource;
+    }
+
     /**
      * Remove the specified resource from storage.
      */

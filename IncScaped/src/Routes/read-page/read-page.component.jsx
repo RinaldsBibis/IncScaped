@@ -2,28 +2,39 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { StorieContext } from '../../context/storie.context';
-import { UserContext } from '../../context/user.context';
-import { RatingContext } from '../../context/rating.context';
-import { ComentContext } from '../../context/coment.context';
 import ComentListComponent from '../../components/coment-list/coment-list.component';
 import './read-page.styles.scss'
+import { useEffect } from 'react';
+import axiosClient from '../../axios';
+import { useState } from 'react';
 
 export default function ReadPageComponent() {
-  const {stories} = useContext(StorieContext);
-  const {allUsers} = useContext(UserContext);
-  const {rating} = useContext(RatingContext);
-  const {coments} = useContext(ComentContext);
+  const [storie, setStorie] = useState({})
+  const [comments, setComments] = useState({})
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  const storie = stories.find(storie => storie.id === id);
-  const author = allUsers.find(user => user.id === storie.user_id);
-  const ratingValue = rating.find(rating => rating.storie_id === id);
-  const comments = coments.filter(coment => coment.storie_id === id);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storyResponse = await axiosClient.get(`/story/${id}`);
+        setStorie(storyResponse.data.data);
+        const commentsResponse = await axiosClient.get(`comments/${id}`);
+        setComments(commentsResponse.data.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+  if (isLoading) {
+      return <></>; // Render a loading message
+  }
   return (
     <div className="storie-container">
       <div className="storie-content">
-        <p>{author.username} {storie.story_date}</p>
-        <p>Rating: {ratingValue.rating}</p>
+        <p>{storie.author} {storie.created_at}</p>
+        <p>Rating: {storie.rating}</p>
         <h1>{storie.title}</h1>
         <div>{storie.content}</div> 
       </div>

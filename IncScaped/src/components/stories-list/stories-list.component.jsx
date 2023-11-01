@@ -4,14 +4,27 @@ import { useContext } from 'react'
 import { UserContext } from "../../context/user.context";
 import { StorieContext } from '../../context/storie.context'
 import './stories-list.styles.scss'
+import { useEffect } from 'react'
+import axiosClient from '../../axios'
 
 
 export default function StoriesListComponent() {  
-  const { allUsers } = useContext(UserContext);
-  const {stories} = useContext(StorieContext);
- 
-
-  const handleCombinedClick = (event, storie) => {
+  
+  const {stories, setStorie} = useContext(StorieContext);
+  useEffect(() => {
+    const fetchData = async () => {
+        axiosClient.get('/storyAll')
+        .then(({data})=>{
+          setStorie(data.data)
+        })
+        .catch((error)=>{
+            console.log(error);
+        }); 
+    };
+    fetchData();
+  }, []);
+  
+   const handleCombinedClick = (event, storie) => {
     handleButtonClick(event);
     handleDeleteStory(storie);
   };
@@ -20,12 +33,7 @@ export default function StoriesListComponent() {
   };
   
   const handleDeleteStory = (storie) => {
-    const user = allUsers.find((user) => user.id === storie.user_id);
-    console.log(user.id)
-    console.log(user.username)
-    console.log(user.email)   
-  };
-
+  }; 
 
   return (
     <div className='stories-container'>

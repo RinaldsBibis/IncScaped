@@ -1,38 +1,21 @@
 import React from "react";
-import "./storie.styles.scss";
-import { UserContext } from "../../context/user.context";
-import { useContext } from "react";
-import { RatingContext } from "../../context/rating.context";
+import "./storie.styles.scss";;
 import { Link } from "react-router-dom";
 
 export default function StorieComponent({ storie, buttons }) {
-  const { allUsers } = useContext(UserContext);
-  const { rating } = useContext(RatingContext);
-  const user = allUsers.find((user) => user.id === storie.user_id);
-  const rait = rating.find((rait) => rait.id === storie.user_id);
-
-
+  const fragment = storie.content.substring(0, 100);
   const admin = localStorage.getItem('ROLE');
-
-
-
   return (
     <div className="storie-body-container">
     <Link  to={`/story/${storie.id}`}>
 
-      <div className="storie-details">
-        
-          <>
-            <p>
-              {/* {storie.story_date} Author: {user.username} */}
-            </p>
-            <p>Rating: {rait.rating}</p>
-            <p>Title: {storie.title}</p>
-            <p>Fragment: {storie.fragment}</p>
-            
-
-          </>
-        
+      <div className="storie-details">        
+          <div className="storie-details">
+                <p>{storie.created_at} Author: {storie.author}</p>
+                <p>Rating: {storie.rating}</p>
+                <p>Title: {storie.title}</p>
+                <p>Fragment: {fragment}</p>                
+            </div>        
       </div>
     </Link>
     {admin == 1 ? (

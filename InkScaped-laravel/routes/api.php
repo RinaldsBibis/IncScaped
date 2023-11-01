@@ -37,6 +37,7 @@ Route::get('/storyAll',[StoriesController::class, 'index']);
 Route::delete('/story/{id}', [StoriesController::class, 'destroy']);
 Route::get('/stoiesAsc',[StoriesController::class, 'indexByRatingAsc']);
 Route::get('/stoiesDesc',[StoriesController::class, 'indexByRatingDesc']);
+Route::get('/story/{id}', [StoriesController::class, 'show']);
 
 
 Route::delete('/comments/{id}', [CommentsController::class, 'destroy']);

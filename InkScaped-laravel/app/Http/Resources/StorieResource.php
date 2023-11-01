@@ -14,7 +14,7 @@ class StorieResource extends JsonResource
      */
     public function toArray(Request $request)
     {
-        $averageRating = $this->comments->avg('rating');
+        $averageRating = $this->comments->count() > 0 ? $this->comments->avg('rating') : 0;
         return [
             'id' => $this->id,
             'title' => $this->title,
