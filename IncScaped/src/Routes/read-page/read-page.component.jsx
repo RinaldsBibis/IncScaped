@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { StorieContext } from '../../context/storie.context';
 import ComentListComponent from '../../components/coment-list/coment-list.component';
+import CommentForm from '../../components/comment-form/comment-form.component';
 import './read-page.styles.scss'
 import { useEffect } from 'react';
 import axiosClient from '../../axios';
@@ -31,7 +32,12 @@ export default function ReadPageComponent() {
       return <></>; // Render a loading message
   }
   return (
+
     <div className="storie-container">
+      <div>
+        <CommentForm/>
+      </div>
+
       <div className="storie-content">
         <p>{storie.author} {storie.created_at}</p>
         <p>Rating: {storie.rating}</p>
