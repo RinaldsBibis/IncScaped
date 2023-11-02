@@ -1,29 +1,14 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import StorieComponent from '../storie/storie.component'
-import { useContext } from 'react'
-import { StorieContext } from '../../context/storie.context'
 import './stories-list.styles.scss'
-import { useEffect } from 'react'
 import axiosClient from '../../axios'
 import Button from '../button/button.component'
+import { StorieContext } from '../../context/storie.context'
 
 
-export default function StoriesListComponent() {  
+export default function StoriesListComponent({stories}) {  
+
   
-  const {stories, setStorie} = useContext(StorieContext);
-  const fetchData = async () => {
-    axiosClient.get('/storyAll')
-    .then(({data})=>{
-      setStorie(data.data)
-    })
-    .catch((error)=>{
-        console.log(error);
-    }); 
-};
-  useEffect(() => {
-    
-    fetchData();
-  }, []);
   
    const handleCombinedClick = (event, storie) => {
     handleButtonClick(event);
@@ -46,15 +31,11 @@ export default function StoriesListComponent() {
 
   return (
     <div className='stories-container'>
-
-        {/* TODO filtrācija */}
-
-        {stories.map((storie, index) => (
- 
-          <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</Button>} storie={storie}/> 
-
-        ))}
-       
+      {stories.length>0&&
+      stories.map((storie, index) => ( 
+        <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</Button>} storie={storie}/> 
+      ))
+      }       
     </div>
   )
 }

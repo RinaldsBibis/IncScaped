@@ -8,25 +8,25 @@ import axiosClient from '../../axios';
 import './comment-form.styles.scss'
 import StarRating from '../star-rating/star-rating.component';
 
-const defaultFormFields = {
-    
-    comment_text:'',
-    rating:'',
-    stories_id:'',
-}
-
-
 export default function CommentForm({story_id, fetchData}) {
+  const defaultFormFields = {
+    
+      comment_text:'',
+      rating:'',
+      stories_id:story_id,
+  }
     const [rating2, setRating] = useState(1);
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {comment_text, rating} = formFields;
+    
     const handleRatingChange = (newRating) => {
         setRating(newRating);
-        setFormFields({ ...formFields, rating: newRating, stories_id: story_id});
+        setFormFields({ ...formFields, rating: newRating});
       };
     
     const handleSubmit = async (event) =>{
         event.preventDefault(); 
+        console.log(formFields)
         axiosClient.post('/comment', formFields)
         //
         .then(({data})=>{
@@ -41,7 +41,7 @@ export default function CommentForm({story_id, fetchData}) {
     }
     const handleChanges = (event) =>{
         const {name,value} = event.target;
-        setFormFields({...formFields,[name]:value, stories_id: story_id})        
+        setFormFields({...formFields,[name]:value})        
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Tab') {

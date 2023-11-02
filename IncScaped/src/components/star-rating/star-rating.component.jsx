@@ -14,8 +14,7 @@ const StarRating = ({ rating, onRatingChange }) => {
               key={index}
               className={index <= (hover || rating) ? "on" : "off"}
               onClick={() => onRatingChange(index)}
-              onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
+              {...onRatingChange ? { onMouseEnter: () => setHover(index), onMouseLeave: () => setHover(rating) } : {}}
             >
               <span className="star">&#9733;</span>
             </button>

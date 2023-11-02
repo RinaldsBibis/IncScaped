@@ -8,6 +8,7 @@ import axiosClient from '../../axios';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import StarRating from '../../components/star-rating/star-rating.component';
 
 export default function ReadPageComponent() {
   const [storie, setStorie] = useState({})
@@ -42,8 +43,8 @@ export default function ReadPageComponent() {
       }      
 
       <div className="storie-content">
-        <p>{storie.author} {storie.created_at}</p>
-        <p>Rating: {storie.rating}</p>
+        <p>Veidoja: {storie.author}  {storie.created_at}</p>
+        <StarRating rating={storie.rating}/>
         <h1>{storie.title}</h1>
         <div>{storie.content}</div> 
       </div>

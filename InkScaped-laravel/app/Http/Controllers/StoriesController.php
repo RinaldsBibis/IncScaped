@@ -61,9 +61,7 @@ class StoriesController extends Controller
 
         $stories = stories::where('user_id', $user->id)->with('user')->get();
 
-        $storyResources = StorieResource::collection($stories);
-
-        return response()->json($storyResources);
+        return StorieResource::collection($stories);
     }
 
     /**
@@ -90,6 +88,7 @@ class StoriesController extends Controller
         $story->delete();    
         return response()->json(['message' => 'Story deleted successfully']);
     }
+    
 
     public function indexByRatingAsc()
     {

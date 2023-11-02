@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../button/button.component';
 import './coment.styles.scss';
 import axiosClient from '../../axios';
-
+import StarRating from '../star-rating/star-rating.component';
 
 export default function ComentComponent({coment, handleUpdateComent}) {
   const curentUser = localStorage.getItem('USER');
@@ -22,7 +22,8 @@ export default function ComentComponent({coment, handleUpdateComent}) {
   return (
     <>
     <div className='comment-container'>
-      <p className="comment-header">{coment.author} {coment.created_at} Rating: {coment.rating}</p>    
+      <p className="comment-header">{coment.author} {coment.created_at} </p>    
+      {<StarRating rating={coment.rating}/>}
       <h3 className='comment-text'>{coment.comment_text}</h3>
       {author == coment.author ? (<Button onClick={handleDelete}>Delete</Button>):null}
     </div>

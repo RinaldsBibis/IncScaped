@@ -1,15 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
 import axiosClient from '../../axios';
 import StoriesListComponent from '../../components/stories-list/stories-list.component'
 import { StorieContext } from '../../context/storie.context';
-
-export default function HomeCmponent() {
-  const {stories, setStorie} = useContext(StorieContext);
+import './myStories.styles.scss'
+export default function MyStoriesComponent() {
+  const {myStories, setMyStories} = useContext(StorieContext);
   const fetchData = async () => {
-    axiosClient.get('/storyAll')
+    axiosClient.get('/mystories')
     .then(({data})=>{
-       setStorie(data.data)
+      setMyStories(data.data)
     })
     .catch((error)=>{
         console.log(error);
@@ -19,11 +18,8 @@ export default function HomeCmponent() {
         
         fetchData();
       }, []);
-  
-      return (
-       <>
-          <Outlet/>
-          <StoriesListComponent stories={stories} />            
-        </>
-      )
-    }
+   
+  return (
+    <StoriesListComponent stories={myStories}/>
+  )
+}

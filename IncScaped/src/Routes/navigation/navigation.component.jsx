@@ -8,7 +8,7 @@ import './navigation.styles.scss'
 import { useNavigate } from "react-router-dom";
 
 export default function Navigation() {  
-    const {userToken,setCurrentUser,setUserToken} = useContext(UserContext);
+    const {userToken,setCurrentUser,setUserToken,currentUser} = useContext(UserContext);
     const navigate = useNavigate();
     const signOut = (event)=>{
       event.preventDefault();
@@ -20,8 +20,6 @@ export default function Navigation() {
       }).catch((error)=>{
         console.log(error);
     });
-
-    
     }
 
     return(
@@ -34,11 +32,12 @@ export default function Navigation() {
                 {userToken?(
                   <>
                     <Link className='nav-link' to="/write">RAKSTĪT</Link>
-                    <Link className='nav-link' to="/admin">admin</Link>
-                    <span className='nav-link' onClick={signOut}>SIGN OUT</span>
+                    {currentUser && currentUser.role === 1? <Link className='nav-link' to="/admin">ADMIN</Link>:null}     
+                     <Link className='nav-link' to="/mystories">MANI STĀSTI</Link>                  
+                    <span className='nav-link' onClick={signOut}>IZRAKSTĪTIES</span>
                   </>
                 ):(
-                  <Link className='nav-link' to="/auth">SIGN IN</Link>
+                  <Link className='nav-link' to="/auth">PIERAKSTĪTIES</Link>
                 )}                
             </div>
         </div>

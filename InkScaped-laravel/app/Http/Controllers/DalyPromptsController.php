@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\dalyPromptsRequest;
 use App\Models\dalyPrompts;
+use Illuminate\Support\Facades\Auth;
 
 class DalyPromptsController extends Controller
 {
@@ -17,6 +18,12 @@ class DalyPromptsController extends Controller
 
     public function create(dalyPromptsRequest $request)
     {
+        $currentser = Auth::user();
+        if($currentser->role == 0){
+            return response([
+                'error' => 'You dont have permisions'
+            ],422);
+        }
         $data = $request->validated();
 
         dalyPrompts::create([            
