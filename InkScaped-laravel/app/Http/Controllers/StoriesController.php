@@ -71,10 +71,23 @@ class StoriesController extends Controller
      */
     public function destroy($id)
     {
+        $user = Auth::user();
         $story = stories::find($id);
+        if($user->role == 0){
+            if (!$story) {
+                return response()->json(['error' => 'Story not found'], 404);
+            }
+            if(!$story->user_id ==  $user->id){
+                return response()->json(['error' => 'You are not logged in'], 404);                
+            }
+            $story->delete();    
+            return response()->json(['message' => 'Story deleted successfully']);
+        }        
         if (!$story) {
             return response()->json(['error' => 'Story not found'], 404);
         }
+
+       
         $story->delete();    
         return response()->json(['message' => 'Story deleted successfully']);
     }

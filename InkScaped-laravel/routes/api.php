@@ -34,7 +34,6 @@ Route::post('/prompt',[DalyPromptsController::class, 'create']);
 
 
 Route::get('/storyAll',[StoriesController::class, 'index']);
-Route::delete('/story/{id}', [StoriesController::class, 'destroy']);
 Route::get('/stoiesAsc',[StoriesController::class, 'indexByRatingAsc']);
 Route::get('/stoiesDesc',[StoriesController::class, 'indexByRatingDesc']);
 Route::get('/story/{id}', [StoriesController::class, 'show']);
@@ -49,4 +48,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout',[AuthController::class, 'logout']);    
     Route::post('/story',[StoriesController::class, 'create']);    
     Route::post('/comment',[CommentsController::class, 'create']); 
+    Route::delete('/story/{id}', [StoriesController::class, 'destroy']);
 });

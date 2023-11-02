@@ -30,7 +30,17 @@ class CommentsController extends Controller
     }
     public function destroy($id)
     {
+        $user = Auth::user();
         $comment = Comments::find($id);
+        if($user->role == 0){
+            if (!$comment) {
+                return response()->json(['error' => 'Comment not found'], 404);
+            }else if(!$comment->user_id ==  $user->id){
+                return response()->json(['error' => 'You are not logged in'], 404);
+            }
+            $comment->delete();    
+            return response()->json(['message' => 'Comment deleted successfully']);
+        }
         if (!$comment) {
             return response()->json(['error' => 'Comment not found'], 404);
         }

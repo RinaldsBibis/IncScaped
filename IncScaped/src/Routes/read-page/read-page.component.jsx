@@ -1,7 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import { useContext } from 'react';
-import { StorieContext } from '../../context/storie.context';
 import ComentListComponent from '../../components/coment-list/coment-list.component';
 import CommentForm from '../../components/comment-form/comment-form.component';
 import './read-page.styles.scss'
