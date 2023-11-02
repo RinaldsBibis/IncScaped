@@ -51,6 +51,21 @@ class StoriesController extends Controller
         return $storyResource;
     }
 
+    public function getStoriesByCurrentUser()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        $stories = stories::where('user_id', $user->id)->with('user')->get();
+
+        $storyResources = StorieResource::collection($stories);
+
+        return response()->json($storyResources);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
