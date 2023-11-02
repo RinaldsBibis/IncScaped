@@ -7,9 +7,10 @@ import StarRating from "../star-rating/star-rating.component";
 export default function StorieComponent({storie, buttons}) {
     const fragment = storie.content.substring(0, 300);
   const curentUser = localStorage.getItem('USER');
-  let admin = 0
+  let admin = 0,author="";
   if(curentUser){
     admin =  JSON.parse(curentUser).role;
+    author =  JSON.parse(curentUser).username;
   }
   
     return (
@@ -22,11 +23,9 @@ export default function StorieComponent({storie, buttons}) {
                     <h4>{storie.title}</h4>
                 </div>                
                 <p>{fragment}...</p>                
-            </div>
+            </div>            
         </Link>
-         {admin == 1 ? (
-          buttons
-          ):(null)}
+        {author == storie.author || admin == 1 ? (buttons):null}
           
     </div>
     )

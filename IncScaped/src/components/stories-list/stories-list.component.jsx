@@ -6,10 +6,8 @@ import Button from '../button/button.component'
 import { StorieContext } from '../../context/storie.context'
 
 
-export default function StoriesListComponent({stories}) {  
+export default function StoriesListComponent({stories,fetchData}) { 
 
-  
-  
    const handleCombinedClick = (event, storie) => {
     handleButtonClick(event);
     handleDeleteStory(storie);

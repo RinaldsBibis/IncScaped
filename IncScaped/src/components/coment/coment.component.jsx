@@ -6,9 +6,10 @@ import StarRating from '../star-rating/star-rating.component';
 
 export default function ComentComponent({coment, handleUpdateComent}) {
   const curentUser = localStorage.getItem('USER');
-  let author = ""
+  let author = "",admin=0;
   if(curentUser){
-    author =  JSON.parse(curentUser).username;   
+    author =  JSON.parse(curentUser).username;  
+    admin =  JSON.parse(curentUser).role; 
   }
   const handleDelete = (user) => {
     axiosClient.delete(`/comments/${coment.id}`)
@@ -25,7 +26,7 @@ export default function ComentComponent({coment, handleUpdateComent}) {
       <p className="comment-header">{coment.author} {coment.created_at} </p>    
       {<StarRating rating={coment.rating}/>}
       <h3 className='comment-text'>{coment.comment_text}</h3>
-      {author == coment.author ? (<Button onClick={handleDelete}>Delete</Button>):null}
+      {author == coment.author || admin == 1 ? (<Button onClick={handleDelete}>Delete</Button>):null}
     </div>
     </>    
   )

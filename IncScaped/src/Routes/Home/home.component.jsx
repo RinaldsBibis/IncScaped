@@ -23,7 +23,7 @@ export default function HomeCmponent() {
       return (
        <>
           <Outlet/>
-          <StoriesListComponent stories={stories} />            
+          <StoriesListComponent stories={stories} fetchData={fetchData}/>            
         </>
       )
     }

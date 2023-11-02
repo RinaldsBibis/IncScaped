@@ -20,6 +20,6 @@ export default function MyStoriesComponent() {
       }, []);
    
   return (
-    <StoriesListComponent stories={myStories}/>
+    <StoriesListComponent stories={myStories} fetchData={fetchData}/>
   )
 }
