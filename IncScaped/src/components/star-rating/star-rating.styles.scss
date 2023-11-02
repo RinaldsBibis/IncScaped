@@ -1,10 +1,11 @@
 .star-rating{
-  button {
+
+button {
+
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    
 }
   .on {
     color: #760000;
@@ -12,5 +13,4 @@
   .off {
     color: #ccc;
   }
-}
 

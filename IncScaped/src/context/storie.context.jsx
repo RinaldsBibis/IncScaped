@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 
-
 export const StorieContext = createContext({
     stories: null,
     setStorie: () => null,
