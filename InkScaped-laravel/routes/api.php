@@ -23,7 +23,7 @@ Route::post('/login',[AuthController::class, 'login']);
 
 Route::get('/users_all',[UsersController::class, 'index']);
 Route::get('/users/{id}',[UsersController::class, 'show']);
-Route::delete('/users/{id}',[UsersController::class, 'destroy']);
+
 
 
 Route::get('/promptALL',[DalyPromptsController::class, 'index']);
@@ -45,8 +45,9 @@ Route::get('comments/{stories_id}', [CommentsController::class, 'getCommentsBySt
 Route::post('/prompt',[DalyPromptsController::class, 'create']);
 
 Route::middleware('auth:sanctum')->group(function(){
+    Route::delete('/users/{id}',[UsersController::class, 'destroy']);
+    Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout',[AuthController::class, 'logout']);    
     Route::post('/story',[StoriesController::class, 'create']);    
     Route::post('/comment',[CommentsController::class, 'create']); 
-    Route::delete('/story/{id}', [StoriesController::class, 'destroy']);
 });
