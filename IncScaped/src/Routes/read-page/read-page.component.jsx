@@ -14,18 +14,18 @@ export default function ReadPageComponent() {
   const [comments, setComments] = useState({})
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const fetchData = async () => {
+    try {
+      const storyResponse = await axiosClient.get(`/story/${id}`);
+      setStorie(storyResponse.data.data);
+      const commentsResponse = await axiosClient.get(`comments/${id}`);
+      setComments(commentsResponse.data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const storyResponse = await axiosClient.get(`/story/${id}`);
-        setStorie(storyResponse.data.data);
-        const commentsResponse = await axiosClient.get(`comments/${id}`);
-        setComments(commentsResponse.data.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   }, [id]);
   if (isLoading) {
@@ -35,7 +35,7 @@ export default function ReadPageComponent() {
 
     <div className="storie-container">
       <div>
-        <CommentForm/>
+        <CommentForm story_id={id} fetchData={fetchData}/>
       </div>
 
       <div className="storie-content">

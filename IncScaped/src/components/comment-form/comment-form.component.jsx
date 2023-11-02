@@ -11,37 +11,36 @@ import StarRating from '../star-rating/star-rating.component';
 const defaultFormFields = {
     
     comment_text:'',
-    rating:1,
+    rating:'',
+    stories_id:'',
 }
 
 
-export default function CommentForm() {
+export default function CommentForm({story_id, fetchData}) {
     const [rating2, setRating] = useState(1);
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {comment_text, rating} = formFields;
     const handleRatingChange = (newRating) => {
         setRating(newRating);
-        setFormFields({ ...formFields, rating: newRating });
+        setFormFields({ ...formFields, rating: newRating, stories_id: story_id});
       };
     
     const handleSubmit = async (event) =>{
         event.preventDefault(); 
-        //userId //StiriesId //Commetn text, Rating
-        //comment
-        console.log(formFields);
-        console.log('Rating:', formFields.rating);
-        // axiosClient.post('/comment', formFields)
-        // //
-        // .then(({data})=>{
-        //     //jāpievieno datu nodošana
-        // })
-        // .catch((error)=>{
-        //     console.log(error);
-        // });        
+        axiosClient.post('/comment', formFields)
+        //
+        .then(({data})=>{
+            console.log(data)
+            fetchData();
+        })
+        .catch((error)=>{
+            console.log(error);
+        });  
+          
     }
     const handleChanges = (event) =>{
         const {name,value} = event.target;
-        setFormFields({...formFields,[name]:value})        
+        setFormFields({...formFields,[name]:value, stories_id: story_id})        
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Tab') {
