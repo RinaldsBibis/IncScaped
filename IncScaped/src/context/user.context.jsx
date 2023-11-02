@@ -20,21 +20,20 @@ export const UserProvider = ({children}) =>{
     const setUserToken = (token) =>{
         if(token){
             localStorage.setItem('TOKEN',token);
-            localStorage.setItem('ROLE',currentUser.role);
         }else{
             localStorage.removeItem('TOKEN')
-            localStorage.removeItem('ROLE');
+            localStorage.removeItem('USER');
         }
         _setUserToken(token);
     }
 
     const setCurrentUser = (user) =>{
         if(localStorage.getItem('TOKEN')){
-            localStorage.setItem('ROLE',user.role);
+            localStorage.setItem('USER',JSON.stringify(user));
 
         }else{
 
-            localStorage.removeItem('ROLE');
+            localStorage.removeItem('USER');
         }
         _setCurrentUser(user);
     }

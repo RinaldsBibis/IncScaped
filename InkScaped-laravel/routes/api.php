@@ -50,4 +50,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout',[AuthController::class, 'logout']);    
     Route::post('/story',[StoriesController::class, 'create']);    
     Route::post('/comment',[CommentsController::class, 'create']); 
+    Route::delete('/comments/{id}', [CommentsController::class, 'destroy']);
 });

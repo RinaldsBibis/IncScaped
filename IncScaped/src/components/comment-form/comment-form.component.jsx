@@ -32,6 +32,7 @@ export default function CommentForm({story_id, fetchData}) {
         .then(({data})=>{
             console.log(data)
             fetchData();
+            setFormFields(defaultFormFields); 
         })
         .catch((error)=>{
             console.log(error);

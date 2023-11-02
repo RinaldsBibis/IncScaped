@@ -3,9 +3,14 @@ import "./storie.styles.scss";;
 import { Link } from "react-router-dom";
 
 
-export default function StorieComponent({storie}) {
+export default function StorieComponent({storie, buttons}) {
     const fragment = storie.content.substring(0, 300);
-  const admin = localStorage.getItem('ROLE');
+  const curentUser = localStorage.getItem('USER');
+  let admin = 0
+  if(curentUser){
+    admin =  JSON.parse(curentUser).role;
+  }
+  
     return (
       <div className="storie-body-container">
         <Link to={`/story/${storie.id}`}>
@@ -19,8 +24,10 @@ export default function StorieComponent({storie}) {
             </div>
         </Link>
          {admin == 1 ? (
-    buttons
-    ):(null)}
-    )
+          buttons
+          ):(null)}
+          
     </div>
+    )
   }
+

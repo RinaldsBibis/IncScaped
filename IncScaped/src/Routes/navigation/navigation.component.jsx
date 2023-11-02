@@ -14,7 +14,7 @@ export default function Navigation() {
       event.preventDefault();
       axiosClient.post('/logout')
       .then(response=>{
-        setCurrentUser({});
+        setCurrentUser(null);
         setUserToken(null);
         navigate("/auth");
       }).catch((error)=>{

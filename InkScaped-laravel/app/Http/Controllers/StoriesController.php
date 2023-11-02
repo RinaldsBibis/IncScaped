@@ -86,7 +86,6 @@ class StoriesController extends Controller
         if (!$story) {
             return response()->json(['error' => 'Story not found'], 404);
         }
-
        
         $story->delete();    
         return response()->json(['message' => 'Story deleted successfully']);

@@ -6,11 +6,14 @@ import './read-page.styles.scss'
 import { useEffect } from 'react';
 import axiosClient from '../../axios';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../../context/user.context';
 
 export default function ReadPageComponent() {
   const [storie, setStorie] = useState({})
   const [comments, setComments] = useState({})
   const [isLoading, setIsLoading] = useState(true);
+  const {userToken} = useContext(UserContext);
   const { id } = useParams();
   const fetchData = async () => {
     try {
@@ -32,9 +35,11 @@ export default function ReadPageComponent() {
   return (
 
     <div className="storie-container">
+      {userToken && 
       <div>
-        <CommentForm story_id={id} fetchData={fetchData}/>
+      <CommentForm story_id={id} fetchData={fetchData}/>
       </div>
+      }      
 
       <div className="storie-content">
         <p>{storie.author} {storie.created_at}</p>
@@ -42,7 +47,7 @@ export default function ReadPageComponent() {
         <h1>{storie.title}</h1>
         <div>{storie.content}</div> 
       </div>
-      {comments&&(<ComentListComponent comments={comments}/>)}
+      {comments&&(<ComentListComponent comments={comments} handleUpdateComent={fetchData}/>)}
     </div>
   )
 }

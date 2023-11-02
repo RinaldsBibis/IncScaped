@@ -3,6 +3,8 @@
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd; // Add a border for separation
+    word-wrap: break-word;
+    white-space: normal;
   }
  
   .comment-header {

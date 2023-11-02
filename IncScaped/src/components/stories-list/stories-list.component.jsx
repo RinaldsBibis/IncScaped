@@ -5,6 +5,7 @@ import { StorieContext } from '../../context/storie.context'
 import './stories-list.styles.scss'
 import { useEffect } from 'react'
 import axiosClient from '../../axios'
+import Button from '../button/button.component'
 
 
 export default function StoriesListComponent() {  
@@ -45,10 +46,12 @@ export default function StoriesListComponent() {
 
   return (
     <div className='stories-container'>
-     
+
+        {/* TODO filtrācija */}
+
         {stories.map((storie, index) => (
  
-          <StorieComponent key={index} buttons={<button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</button>} storie={storie}/> 
+          <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</Button>} storie={storie}/> 
 
         ))}
        
