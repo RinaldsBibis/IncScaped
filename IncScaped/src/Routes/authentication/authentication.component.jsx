@@ -11,10 +11,9 @@ export default function Authentication() {
     return <Navigate to="/"/>
   }
   return (
-    <div className='authentication-container'>
-        <SignInForm/>
-        <SignUpForm/>
-    </div>
-    
+      <div className='authentication-container'>
+            <SignInForm />
+            <SignUpForm />
+      </div>    
   )
 }

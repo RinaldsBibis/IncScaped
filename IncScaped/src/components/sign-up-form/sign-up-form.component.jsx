@@ -6,6 +6,7 @@ import Button from '../button/button.component';
 import axiosClient from '../../axios';
 import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
+import ErrorMessage from '../error-message/error-message.component';
 const defaultFormFields = {
     username:'',
     email:'',
@@ -22,8 +23,10 @@ export default function SignUpForm() {
         ...formFields,
         role: "0"
     };
+    const [errorMessage, setErrorMessage]=useState("")
     const handleSubmit = async (event) =>{
         event.preventDefault();
+        setErrorMessage("");
         if(password !== pasword_confirmation){
             alert("passwords do not match");
             return;
@@ -33,9 +36,10 @@ export default function SignUpForm() {
             setCurrentUser(data.user);
             setUserToken(data.token);
         })
-        .catch((error)=>{
-            console.log(error);
-        })
+        .catch(({response})=>{
+            console.log(response.data.message);
+            setErrorMessage(response.data.message);
+        });  
         
     }
     const handleChanges = (event) =>{
@@ -53,6 +57,7 @@ export default function SignUpForm() {
             <FormInput label="Confirm Password" type="password" required onChange={handleChanges} name="pasword_confirmation" value={pasword_confirmation}/>
             <Button type='submit'>Sign up</Button>
         </form>
+        {errorMessage&&<ErrorMessage message={errorMessage}/>}
     </div>
   )
 }

@@ -5,39 +5,46 @@ import FormInput from "../../components/form-input/form-input.component";
 import axiosClient from "../../axios";
 import { useContext } from "react";
 import { UserContext } from "../../context/user.context";
-import StoriesListComponent from '../../components/stories-list/stories-list.component'
 import AddUserForm from "../../components/add-user-form/add-user-form.component";
 import { useEffect } from "react";
+import ErrorMessage from "../../components/error-message/error-message.component";
 export default function AdminHomeComponent() {
 
 
-
+  const [errorMessage, setErrorMessage]=useState("")
   const [prompt_text, setPrompts] = useState('');
   const [show_date, setshow_date] = useState('');
-  const [error_message, setError_message] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
      axiosClient.post("/prompt", storyInfo)
+     .then(({data})=>{
+
+     })
+     .catch(({response})=>{
+         console.log(response.data);
+         setErrorMessage(response.data.message);
+     });
       console.log(storyInfo)
       setPrompts('')
     setshow_date('')
   };
 
   const handleDeleteUser = (user) => {
-
+    setErrorMessage("");
     axiosClient.delete(`/users/${user.id}`)
     .then(({data})=>{
 
  })
  .catch(({response})=>{
      console.log(response.data);
-     setError_message(response.data.message);
+     setErrorMessage(response.data.message);
  });
  getAllUsers();
   };
 
   const handleChange = (event) => {
+    setErrorMessage("");
     const { value } = event.target;
     setPrompts(value);
   };
@@ -46,8 +53,9 @@ export default function AdminHomeComponent() {
     .then(({data})=>{
        setAllUsers(data)
   })
-  .catch((error)=>{
-      console.log(error);
+  .catch(({response})=>{
+      console.log(response);
+      setErrorMessage(response.data.message);
   });
   }
 useEffect(()=>{
@@ -93,9 +101,12 @@ const handleCombinedClick = (event, user) => {
 };
 
   return (
-    
-    <div className="wrapper"> 
-    {error_message&&<h1>{error_message}</h1>}
+    <div >
+      <div className="admin_page-container">
+        {errorMessage&&<ErrorMessage message={errorMessage}/>}
+      </div>     
+
+    <div className="wrapper">     
       <div className="one">
         <form onSubmit={handleSubmit}>
           <FormInput
@@ -157,17 +168,13 @@ const handleCombinedClick = (event, user) => {
           </div>
         </form>
         </div>
-    
-        <div className="stories-scroll">
-        <StoriesListComponent/> 
-        </div>
 
         <div className="four">
           <AddUserForm getAllUsers={getAllUsers}/>
           </div>        
 
     </div>
-
+    </div>
 
 
   );

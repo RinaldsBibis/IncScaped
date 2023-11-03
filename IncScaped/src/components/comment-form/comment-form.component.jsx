@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import axiosClient from '../../axios';
 import './comment-form.styles.scss'
 import StarRating from '../star-rating/star-rating.component';
+import ErrorMessage from '../error-message/error-message.component';
 
 export default function CommentForm({story_id, fetchData}) {
   const defaultFormFields = {
@@ -18,6 +19,7 @@ export default function CommentForm({story_id, fetchData}) {
     const [rating2, setRating] = useState(1);
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {comment_text, rating} = formFields;
+    const [errorMessage, setErrorMessage]=useState("")
     
     const handleRatingChange = (newRating) => {
         setRating(newRating);
@@ -26,6 +28,7 @@ export default function CommentForm({story_id, fetchData}) {
     
     const handleSubmit = async (event) =>{
         event.preventDefault(); 
+        setErrorMessage("");
         console.log(formFields)
         axiosClient.post('/comment', formFields)
         //
@@ -34,8 +37,10 @@ export default function CommentForm({story_id, fetchData}) {
             fetchData();
             setFormFields(defaultFormFields); 
         })
-        .catch((error)=>{
-            console.log(error);
+        .catch(({response})=>{
+          if (response.data.message.includes('comments_user_id_stories_id_unique')) {
+            setErrorMessage("You have already created a comment for this story");
+          }
         });  
           
     }
@@ -74,9 +79,10 @@ export default function CommentForm({story_id, fetchData}) {
           />
   
             <div className='buttons-container'>
-                <Button type='submit'>Comment</Button>
-            </div>            
+                <Button type='submit'>Comment</Button>                
+            </div> 
         </form>
+        {errorMessage&&<ErrorMessage message={errorMessage}/>}
     </div>
   )
 }

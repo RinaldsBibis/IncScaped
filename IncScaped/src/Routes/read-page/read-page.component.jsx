@@ -37,9 +37,7 @@ export default function ReadPageComponent() {
 
     <div className="storie-container">
       {userToken && 
-      <div>
       <CommentForm story_id={id} fetchData={fetchData}/>
-      </div>
       }      
 
       <div className="storie-content">

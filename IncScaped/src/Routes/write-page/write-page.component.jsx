@@ -5,9 +5,11 @@ import axiosClient from '../../axios';
 import { useState } from 'react';
 import Button from '../../components/button/button.component';
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from '../../components/error-message/error-message.component';
 
 export default function WritePageComponent() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage]=useState("")
   const [prompt, setPrompt] = useState({})
   const [formData, setFormData] = useState({
     prompt_id: '',
@@ -45,15 +47,19 @@ export default function WritePageComponent() {
 
   const handleStorySubmit = async (e) => {
     e.preventDefault();   
+    setErrorMessage("");
     axiosClient.post('/story', formData)
         .then(({data})=>{
           console.log(data)     
           navigate("/");     
         })
-        .catch((error)=>{
-            console.log(error);
-        });  
-        
+        .catch(({response})=>{
+          if (response.data.message.includes('stories_prompt_id_user_id_unique')) {
+            setErrorMessage("You have already created a story today");
+          }else{
+            setErrorMessage(response.data.message);
+          }            
+        });          
   };
 
   //tab
@@ -72,9 +78,9 @@ export default function WritePageComponent() {
     };
   }
 
-
   return (
     <div className="write-page-container">
+      {errorMessage&&<ErrorMessage message={errorMessage}/>}
       <h1>Write Your Story about {prompt.prompt_text}</h1>
       <div className="form-container">      
         <form onSubmit={handleStorySubmit}>
@@ -94,8 +100,8 @@ export default function WritePageComponent() {
             onKeyDown={handleKeyDown}
             required
           />
-          <Button type='submit'>Submit Story</Button>
-        </form>
+          <Button type='submit'>Submit Story</Button>          
+        </form>        
       </div>
     </div>
   )

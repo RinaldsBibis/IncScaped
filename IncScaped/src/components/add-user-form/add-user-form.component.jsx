@@ -3,6 +3,7 @@ import { useState } from 'react'
 import FormInput from '../form-input/form-input.component';
 import axiosClient from '../../axios';
 import Button from '../button/button.component';
+import ErrorMessage from '../error-message/error-message.component';
 
 const defaultFormFields = {
     username:'',
@@ -13,10 +14,18 @@ const defaultFormFields = {
 export default function AddUserForm({getAllUsers}) {
     const [formFields,setFormFields]=useState(defaultFormFields);
     const {username,email,password} = formFields;
+    const [errorMessage, setErrorMessage]=useState("")
        
     const handleSubmit = async (event) =>{
         event.preventDefault()
+        setErrorMessage("");
         axiosClient.post('/users', userInfo)
+        .then(({data})=>{
+        })
+        .catch(({response})=>{
+            console.log(response);
+            setErrorMessage(response.data.message);
+        });
         setFormFields(defaultFormFields);
         getAllUsers();
     }
@@ -55,6 +64,7 @@ export default function AddUserForm({getAllUsers}) {
             <Button type='submit'>Create account</Button>
             
         </form>
+        {errorMessage&&<ErrorMessage message={errorMessage}/>}
     </div>
   )
 }
