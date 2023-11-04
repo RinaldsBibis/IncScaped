@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\storieRequest;
 use App\Http\Resources\StorieResource;
 use App\Models\stories;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -104,11 +105,28 @@ class StoriesController extends Controller
 
     public function indexByRatingDesc()
     {
-        $stories = stories::with('comments') 
-        ->withAvg('comments', 'rating') 
-        ->orderByDesc('comments_avg_rating') 
+        $stories = stories::with('comments')
+        ->withAvg('comments', 'rating')
+        ->orderByDesc('comments_avg_rating')
         ->get();
 
+        $stories = StorieResource::collection($stories);
+
+        return response()->json($stories);
+    }
+
+    public function todaysStories()
+    {
+        $today = Carbon::today();
+        
+        // Query the stories created today and order them by rating in descending order
+        $stories = stories::with(['comments', 'user', 'dalyPrompts'])
+            ->whereDate('created_at', $today)
+            ->withAvg('comments', 'rating')
+            ->orderByDesc('comments_avg_rating')
+            ->get();
+
+        // Pass the sorted stories to the resource
         $stories = StorieResource::collection($stories);
 
         return response()->json($stories);

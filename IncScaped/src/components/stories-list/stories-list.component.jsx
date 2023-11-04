@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import StorieComponent from '../storie/storie.component'
 import './stories-list.styles.scss'
 import axiosClient from '../../axios'
 import Button from '../button/button.component'
-import { StorieContext } from '../../context/storie.context'
 
 
 export default function StoriesListComponent({stories,fetchData}) { 
@@ -28,7 +27,7 @@ export default function StoriesListComponent({stories,fetchData}) {
   }; 
 
   return (
-    <div className='stories-container'>
+    <div className='stories-container'>      
       {stories.length>0&&
       stories.map((storie, index) => ( 
         <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</Button>} storie={storie}/> 

@@ -5,7 +5,57 @@
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    padding-top: 120px;
+    // padding-top: 60px;
+    
   }
+
+  .header-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 10px; /* Add some margin if needed */
+    padding-top: 90px;
+    width: 50%;
+    align-items: end;
+    
+   .sortDropdown{
+    margin-left: 20px;
+   }
+  } 
+
+  
+
+.sortDropdown {
+  appearance: none;
+  background-color: rgb(56, 56, 56);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  color: rgb(226, 226, 226);
+  width: 200px;
+  cursor: pointer;
+}
+
+.sortDropdown:hover {
+  border-color: rgb(0, 0, 0);
+}
+
+.sortDropdown:focus {
+  outline: none;
+  border-color: #37393a;
+}
+
+.sortDropdown option {
+  background-color: #fff;
+  color: #333;
+}
+
+.sortDropdown option:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
 
   

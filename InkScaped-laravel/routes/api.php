@@ -36,6 +36,7 @@ Route::delete('/prompt/{id}', [DalyPromptsController::class, 'destroy']);
 Route::get('/storyAll',[StoriesController::class, 'index']);
 Route::get('/stoiesAsc',[StoriesController::class, 'indexByRatingAsc']);
 Route::get('/stoiesDesc',[StoriesController::class, 'indexByRatingDesc']);
+Route::get('/stoiesToday',[StoriesController::class, 'todaysStories']);
 Route::get('/story/{id}', [StoriesController::class, 'show']);
 
 

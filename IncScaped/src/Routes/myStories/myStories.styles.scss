@@ -1,9 +1,19 @@
 .page-container {
-    display: flex; 
-    justify-content: center;
-    align-items: flex-start; 
-    text-align: left;
-    max-width: 60%;
-    margin: 0 auto;
-    padding-top: 130px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   }
+
+  .header-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 10px; /* Add some margin if needed */
+    padding-top: 90px;
+    width: 50%;
+    align-items: end;
+    
+  } 
