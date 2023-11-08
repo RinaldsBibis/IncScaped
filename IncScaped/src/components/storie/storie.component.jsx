@@ -17,10 +17,14 @@ export default function StorieComponent({storie, buttons}) {
       <div className="storie-body-container">
         <Link to={`/story/${storie.id}`}>
             <div className="storie-details">
-                <p>{storie.created_at} Veidoja: {storie.author} Tēma: {storie.prompt}</p>
-                <StarRating rating={storie.rating}/>
+                <div className="space-between">
+                  <p ><b>Veidoja:</b>  {storie.author}</p>
+                  <p ><b>Tēma:</b> {storie.prompt}</p>
+                </div>
+                
+                 <StarRating rating={storie.rating}/>
                 <div className="title-container">
-                    <h4>{storie.title}</h4>
+                    <h3>{storie.title}</h3>
                 </div>                
                 <p>{fragment}...</p>                
             </div>            
