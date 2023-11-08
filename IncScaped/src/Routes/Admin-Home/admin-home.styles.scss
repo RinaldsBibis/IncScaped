@@ -26,24 +26,24 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
 
 .one {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1/2;
   width: 70%;
 }
 .two {
-  grid-column: 2;
-  grid-row: 1 / 5;
+  grid-column: 3;
+  grid-row: 1 / 4;
   width: 100%;
 }
 
 .four {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 2/5;
 }
 .table-scroll {
