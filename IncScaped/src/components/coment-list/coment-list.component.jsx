@@ -6,7 +6,7 @@ export default function ComentListComponent({comments,handleUpdateComent}) {
   
   return (
     <div className="comments-container">
-      <h2>COMENTS:</h2>
+      <h2>KOMENTĀRI:</h2>
         {comments.map((coment, index) => (
           <ComentComponent key={index} coment={coment} handleUpdateComent={handleUpdateComent} />
         ))}

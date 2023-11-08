@@ -64,8 +64,8 @@ export default function CommentForm({story_id, fetchData}) {
      }
   return (
     <div className='comment-form-container'>
-        <h2>Rate and comment</h2>
-        <span>Select a rating and write a short review</span>
+        <h2>Atstāj novērtējumu</h2>
+        <span>Izvēlies novērtējumu and uzraksti īsu atsauksmi</span>
         <form onSubmit={handleSubmit} className='form'>
             <StarRating rating={rating} onRatingChange={handleRatingChange}/>
             <textarea
@@ -79,7 +79,7 @@ export default function CommentForm({story_id, fetchData}) {
           />
   
             <div className='buttons-container'>
-                <Button type='submit'>Comment</Button>                
+                <Button type='submit'>Komentēt</Button>                
             </div> 
         </form>
         {errorMessage&&<ErrorMessage message={errorMessage}/>}

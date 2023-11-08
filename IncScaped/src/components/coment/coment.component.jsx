@@ -26,7 +26,7 @@ export default function ComentComponent({coment, handleUpdateComent}) {
       <p className="comment-header">{coment.author} {coment.created_at} </p>    
       {<StarRating rating={coment.rating}/>}
       <h3 className='comment-text'>{coment.comment_text}</h3>
-      {author == coment.author || admin == 1 ? (<Button onClick={handleDelete}>Delete</Button>):null}
+      {author == coment.author || admin == 1 ? (<Button onClick={handleDelete}>Dzēst</Button>):null}
     </div>
     </>    
   )

@@ -81,7 +81,8 @@ export default function WritePageComponent() {
   return (
     <div className="write-page-container">
       {errorMessage&&<ErrorMessage message={errorMessage}/>}
-      <h1>Write Your Story about {prompt.prompt_text}</h1>
+      <h1>ŠODIENAS TĒMA: {prompt.prompt_text}</h1>
+      <h1>Raksti savu stāstu{prompt.prompt_text}</h1>
       <div className="form-container">      
         <form onSubmit={handleStorySubmit}>
           <input
@@ -100,7 +101,7 @@ export default function WritePageComponent() {
             onKeyDown={handleKeyDown}
             required
           />
-          <Button type='submit'>Submit Story</Button>          
+          <Button type='submit'>Iesniegt</Button>          
         </form>        
       </div>
     </div>

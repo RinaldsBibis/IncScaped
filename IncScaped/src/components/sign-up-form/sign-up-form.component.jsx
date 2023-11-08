@@ -48,13 +48,13 @@ export default function SignUpForm() {
     }
   return (
     <div className='sign-up-container'>
-        <h2>Dont have an account?</h2>
-        <span>Sign up with tour email and password</span>
+        <h2>Neesat vel pierakstijušies?</h2>
+        <span>Pierakstieties ar E-pastu un paroli</span>
         <form onSubmit={handleSubmit}>
-            <FormInput label="Diplay name" type="text" required onChange={handleChanges} name="username" value={username}/>
-            <FormInput label="Email" type="email" required onChange={handleChanges} name="email" value={email}/>
-            <FormInput label="Password" type="password" required onChange={handleChanges} name="password" value={password}/>
-            <FormInput label="Confirm Password" type="password" required onChange={handleChanges} name="pasword_confirmation" value={pasword_confirmation}/>
+            <FormInput label="Lietotāj vārds" type="text" required onChange={handleChanges} name="username" value={username}/>
+            <FormInput label="Epasts" type="email" required onChange={handleChanges} name="email" value={email}/>
+            <FormInput label="Parole" type="password" required onChange={handleChanges} name="password" value={password}/>
+            <FormInput label="Atkārtojiet paroli" type="password" required onChange={handleChanges} name="pasword_confirmation" value={pasword_confirmation}/>
             <Button type='submit'>Sign up</Button>
         </form>
         {errorMessage&&<ErrorMessage message={errorMessage}/>}

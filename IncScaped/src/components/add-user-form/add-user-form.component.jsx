@@ -48,11 +48,11 @@ export default function AddUserForm({getAllUsers}) {
 
   return (
     <div className='sign-up-container'>
-        <h2>Create a new account</h2>
+        <h2>Izveidot jaunu profilu</h2>
         <form onSubmit={handleSubmit}>
-            <FormInput label="Username" type="text" required onChange={handleChanges} name="username" value={username}/>
-            <FormInput label="Email" type="email" required onChange={handleChanges} name="email" value={email}/>
-            <FormInput label="Password" type="password" required onChange={handleChanges} name="password" value={password}/>
+            <FormInput label="Lietotāj vārds" type="text" required onChange={handleChanges} name="username" value={username}/>
+            <FormInput label="E-pasts" type="email" required onChange={handleChanges} name="email" value={email}/>
+            <FormInput label="parole" type="password" required onChange={handleChanges} name="password" value={password}/>
             <input 
           type="checkbox"
           onChange={handleCheckboxChange}
@@ -61,7 +61,7 @@ export default function AddUserForm({getAllUsers}) {
             <label htmlFor="checkbox">Admin</label>
             <p></p>
             
-            <Button type='submit'>Create account</Button>
+            <Button type='submit'>Izveidot profilu</Button>
             
         </form>
         {errorMessage&&<ErrorMessage message={errorMessage}/>}

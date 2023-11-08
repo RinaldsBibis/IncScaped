@@ -134,10 +134,10 @@ const handleCombinedClick = (event, user) => {
 
       <div className="two">
         <form>
-          <h1>User Table</h1>
+          <h1>Lietotāju tabula</h1>
           <FormInput
             onChange={handleFilterChange}
-            label="Filter username"
+            label="Meklēt"
             type="text"
             name="filter"
             value={filter}
@@ -147,9 +147,9 @@ const handleCombinedClick = (event, user) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>REMOVE</th>
+                <th>LIETOTĀJ VĀRDS</th>
+                <th>E-PASTS</th>
+                <th>NOŅEMT</th>
               </tr>
             </thead>
             <tbody>
@@ -159,7 +159,7 @@ const handleCombinedClick = (event, user) => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
-                    <Button type="submit" onClick={(event) => handleCombinedClick(event, user)} >Delete</Button>
+                    <Button type="submit" onClick={(event) => handleCombinedClick(event, user)} >Dzēst</Button>
                   </td>
                 </tr>
               ))}

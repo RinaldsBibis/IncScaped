@@ -39,13 +39,13 @@ export default function SignInForm() {
     }
   return (
     <div className='sign-up-container'> 
-        <h2>Already have an account?</h2>
-        <span>Sign in with tour email and password</span>
+        <h2>Esat jau pierakstijušies?</h2>
+        <span>Ieraksties ar e-pastu un paroli</span>
         <form onSubmit={handleSubmit}>
-            <FormInput label="Email" type="email" required onChange={handleChanges} name="email" value={email}/>
-            <FormInput label="Password" type="password" required onChange={handleChanges} name="password" value={password}/>
+            <FormInput label="Epasts" type="email" required onChange={handleChanges} name="email" value={email}/>
+            <FormInput label="Parole" type="password" required onChange={handleChanges} name="password" value={password}/>
             <div className='buttons-container'>
-                <Button type='submit'>Sign In</Button>
+                <Button type='submit'>Ierakstīties</Button>
             </div>            
         </form>   
         {errorMessage&&<ErrorMessage message={errorMessage}/>}

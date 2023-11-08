@@ -30,7 +30,7 @@ export default function StoriesListComponent({stories,fetchData}) {
     <div className='stories-container'>      
       {stories.length>0&&
       stories.map((storie, index) => ( 
-        <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Delete</Button>} storie={storie}/> 
+        <StorieComponent key={index} buttons={<Button type="submit" onClick={(event) => handleCombinedClick(event, storie)} >Dzēst</Button>} storie={storie}/> 
       ))
       }       
     </div>

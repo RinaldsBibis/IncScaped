@@ -67,9 +67,9 @@ export default function HomeCmponent() {
             <div className="header-container">              
               <SearchInputComponent placeholder={"Meklēt"} value={filter} onChange={handleFilterChange} name="filter" />      
               <select className="sortDropdown" onChange={handleSortChange}>
-                <option value="highest">Highest Rating</option>
-                <option value="todaysBest">Best today</option>       
-                <option value="lowest">Lowest Rating</option>
+                <option value="highest">Visaugstāk novērtētie</option>
+                <option value="todaysBest">Šodienas labākie</option>       
+                <option value="lowest">Visszemāk novērtētie</option>
               </select> 
             </div>
           </div>
