@@ -1,7 +1,8 @@
 import React from 'react'
 import { useContext } from 'react'
 import { Outlet, Link } from 'react-router-dom'
-import CrwnLogo from '../../assets/crown.svg'
+// import CrwnLogo from '../../assets/crown.svg'
+import Logo from '../../assets/inkscapedLogo.png'
 import axiosClient from '../../axios'
 import { UserContext } from '../../context/user.context'
 import './navigation.styles.scss'
@@ -26,7 +27,7 @@ export default function Navigation() {
       <>
         <div className='navigation'>
             <Link className='logo-container' to="/">
-                <CrwnLogo className='logo'/>
+                <img className='logoStyle' src={Logo} alt="Logo" />
             </Link>
             <div className='nav-links-container'>                
                 {userToken?(

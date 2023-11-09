@@ -82,7 +82,7 @@ export default function WritePageComponent() {
     <div className="write-page-container">
       {errorMessage&&<ErrorMessage message={errorMessage}/>}
       <h1>ŠODIENAS TĒMA: {prompt.prompt_text}</h1>
-      <h1>Raksti savu stāstu{prompt.prompt_text}</h1>
+      <h1>Raksti savu stāstu</h1>
       <div className="form-container">      
         <form onSubmit={handleStorySubmit}>
           <input

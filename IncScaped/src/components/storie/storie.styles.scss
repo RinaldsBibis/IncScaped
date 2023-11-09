@@ -26,4 +26,8 @@
     &:hover {
       border-color: #202122; 
     }
+    .space-between{
+      justify-content: space-between;
+      display: flex;
+    }
   }
